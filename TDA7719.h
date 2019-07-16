@@ -1,4 +1,4 @@
-// Алксандр Лиман
+// https://rcl-radio.ru/?p=62993
 // liman324@yandex.ru
 
 #ifndef TDA7719_H
