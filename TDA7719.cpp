@@ -662,9 +662,9 @@ void TDA7719::setTest2(int y0, int y1, int y2, int y3){
         writeWire(TDA7719_TEST_2, y_sum);
         }
 
-void TDA7719::writeWire(char a, char b){
-  Wire.beginTransmission(TDA7719_address);
-  Wire.write (a);
-  Wire.write (b);
-  Wire.endTransmission();
+void TDA7719::writeWire(uint8_t reg, uint8_t value) {
+    Wire.beginTransmission(TDA7719_address);
+    Wire.write(reg);
+    Wire.write(value);
+    Wire.endTransmission();
 }
