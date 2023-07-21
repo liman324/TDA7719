@@ -34,6 +34,10 @@ class TDA7719
 {
   public:
     TDA7719();
+	
+	 /// Direct configuration transmission (21 bytes of data array should be referenced)
+		void sendConfig(uint8_t* data);
+	
      ///  Input configuration / main selector ///             
         void setInput(int input, int md, int input_gain, int input_conf); // int  0...7, 0...1, 0...1, 0...7 
         // IN0...IN7, MD1 MD2, 0dB 3dB, CFG0...CFG7

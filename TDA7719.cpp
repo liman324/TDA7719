@@ -6,6 +6,35 @@ TDA7719::TDA7719(){
 	Wire.begin();
 }
 
+// Function to set all register after placing each data in order with one function call
+void TDA7719::sendConfig(uint8_t* data) {
+	// Make sure the received data array has exact 21 bytes
+	if(sizeof(data) == 21){
+		// Send all of the data one by one for each register of TDA7719 audio controller
+		writeWire(TDA7719_INPUT, data[0]);
+		writeWire(TDA7719_INPUT_2, data[1]);
+		writeWire(TDA7719_MIX_SOUR, data[2]);
+		writeWire(TDA7719_MIX_CONT, data[3]);
+		writeWire(TDA7719_MUTE, data[4]);
+		writeWire(TDA7719_SOFT_1, data[5]);
+		writeWire(TDA7719_SOFT_2, data[6]);
+		writeWire(TDA7719_LOUD, data[7]);
+		writeWire(TDA7719_VOL, data[8]);
+		writeWire(TDA7719_TRBLE, data[9]);
+		writeWire(TDA7719_MIDDLE, data[10]);
+		writeWire(TDA7719_BASS, data[11]);
+		writeWire(TDA7719_SUB_M_B, data[12]);
+		writeWire(TDA7719_ATT_LF, data[13]);
+		writeWire(TDA7719_ATT_RF, data[14]);
+		writeWire(TDA7719_ATT_LR, data[15]);
+		writeWire(TDA7719_ATT_RR, data[16]);
+		writeWire(TDA7719_ATT_SUB_L, data[17]);
+		writeWire(TDA7719_ATT_SUB_R, data[18]);
+		writeWire(TDA7719_TEST_1, data[19]);
+		writeWire(TDA7719_TEST_2, data[20]);
+	}
+}
+
 void TDA7719::setInput(int input, int md, int input_gain, int input_conf){
         switch (input) {    
         case  0: input = 0b00000000;break;
@@ -633,9 +662,9 @@ void TDA7719::setTest2(int y0, int y1, int y2, int y3){
         writeWire(TDA7719_TEST_2, y_sum);
         }
 
-void TDA7719::writeWire(char a, char b){
-  Wire.beginTransmission(TDA7719_address);
-  Wire.write (a);
-  Wire.write (b);
-  Wire.endTransmission();
+void TDA7719::writeWire(uint8_t reg, uint8_t value) {
+    Wire.beginTransmission(TDA7719_address);
+    Wire.write(reg);
+    Wire.write(value);
+    Wire.endTransmission();
 }
